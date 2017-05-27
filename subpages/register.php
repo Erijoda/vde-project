@@ -10,7 +10,7 @@ if(isset($_POST['register'])) {
     <form method="POST">
         <div>
             <label for="username">Username:</label>
-            <input type="text" name="username" value="<?php echo $username;?>">
+            <input type="text" name="username" value="<?php echo $_POST['username'];?>">
             <?php
             if (isset($_POST['register']) && empty($username)) {
                 echo '<span class="error">You must supply a username.</span>';
@@ -46,11 +46,11 @@ if(isset($_POST['register'])) {
         </div>
         <div>
             <label for="firstname">Firstname:</label>
-            <input type="text" name="firstname" value="<?php echo $firstname;?>">
+            <input type="text" name="firstname" value="<?php echo $_POST['firstname'];?>">
         </div>
         <div>
             <label for="lastname">Lastname:</label>
-            <input type="text" name="lastname" value="<?php echo $lastname;?>">
+            <input type="text" name="lastname" value="<?php echo $_POST['lastname'];?>">
         </div>
         <input type="submit" name="register" value="Register">
     </form>
