@@ -7,7 +7,7 @@ if(isset($_GET['logout'])) {
       die();
     }
 }
-if ($userService->isLoggedIn()) {
+if (!$userService->isLoggedIn()) {
   header("Location: index.php");
   die();
 }
