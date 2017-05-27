@@ -40,7 +40,7 @@ if (!$userService->isLoggedIn()) {
                </thead>
                <tbody>
                <?php
-               foreach ($db->query("SELECT (id, username, firstname, lastname) FROM users ORDER BY id ASC") as $row) {
+               foreach ($db->query("SELECT id, username, firstname, lastname FROM users ORDER BY id ASC") as $row) {
                 echo "<tr>";
                  echo "<td>{$row['id']}</td>";
                  echo "<td>{$row['username']}</td>";
