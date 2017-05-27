@@ -1,8 +1,26 @@
 <?php
-if(isset($_POST['register'])) {
-    $username = $_POST['username'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
+$error['username'] = "";
+$error['password'] = "";
+$error['successful'] = "";
+
+if (isset($_POST['register'])) {
+    $_POST['username'] = trim($_POST['username']);
+    if (empty($_POST['username'])) {
+        $error['username'] = '<span class="error">Your username cannot be empty</span>';
+    } elseif ($userService->isUsernameTaken($_POST['username'])) {
+        $error['username'] = '<span class="error">The username is taken</span>';
+    } elseif ($_POST['password'] !== $_POST['password2']) {
+        $error['password'] = '<span class="error">The passwords don\'t match</span>';
+    } elseif (empty($_POST['password'])) {
+        $error['password'] = '<span class="error">Your password cannot be empty.</span>';
+    } else {
+        if ($userService->register($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'])) {
+          $error['successful'] = '<span class="success">You\'ve registered! You can now log in.</span>';
+          unset($_POST['username']);
+          unset($_POST['firstname']);
+          unset($_POST['lastname']);
+        }
+    }
 }
 ?>
 <div>
@@ -11,38 +29,17 @@ if(isset($_POST['register'])) {
         <div>
             <label for="username">Username:</label>
             <input type="text" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'];?>">
-            <?php
-            if (isset($_POST['register']) && empty($username)) {
-                echo '<span class="error">You must supply a username.</span>';
-            }
-            if (isset($_POST['register']) && $username_taken) {
-                echo '<span class="error">The username is already taken.</span>';
-            }
-            ?>
+            <?php echo $error['username']; ?>
         </div>
         <div>
             <label for="password">Password:</label>
             <input type="password" name="password">
-            <?php
-            if (isset($_POST['register']) && ($_POST['password'] != $_POST['password2'])) {
-                echo '<span class="error">The passwords does not match.</span>';
-            }
-            if (isset($_POST['register']) && empty($_POST['password'])) {
-                echo '<span class="error">You must supply a password.</span>';
-            }
-            ?>
+            <?php echo $error['password']; ?>
         </div>
         <div>
             <label for="password2">Confirm password:</label>
             <input type="password" name="password2">
-            <?php
-            if (isset($_POST['register']) && ($_POST['password'] != $_POST['password2'])) {
-                echo '<span class="error">The passwords does not match.</span>';
-            }
-            if (isset($_POST['register']) && empty($_POST['password'])) {
-                echo '<span class="error">You must supply a password.</span>';
-            }
-            ?>
+            <?php echo $error['password']; ?>
         </div>
         <div>
             <label for="firstname">Firstname:</label>
@@ -52,6 +49,6 @@ if(isset($_POST['register'])) {
             <label for="lastname">Lastname:</label>
             <input type="text" name="lastname" value="<?php if (isset($_POST['lastname'])) echo $_POST['lastname'];?>">
         </div>
-        <input type="submit" name="register" value="Register">
+        <input type="submit" name="register" value="Register"><?php echo $error['successful'];?>
     </form>
 </div>

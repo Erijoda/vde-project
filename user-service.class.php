@@ -7,6 +7,17 @@ class UserService {
     $this->dbContext = $dbContext;
   }
 
+  public function isUsernameTaken($username) {
+    $stmt = $this->dbContext->prepare("SELECT id FROM users WHERE username=:username LIMIT 1");
+    $stmt->bindParam(':username');
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function isLoggedIn() {
       if (isset($_SESSION['user_id'])) {
           return true;
@@ -21,7 +32,7 @@ class UserService {
       $stmt->execute();
       $user = $stmt->fetch();
 
-      if ($stmt->rowCount > 0) {
+      if ($stmt->rowCount() > 0) {
         if (password_verify($this->saltPassword($password, $username), $user['password'])) {
           $_SESSION['user_id'] = $user['id'];
           return true;
