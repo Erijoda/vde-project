@@ -1,5 +1,6 @@
 #container {
   margin: 1em auto;
+  width: 1000px;
 }
 
 .error {
@@ -9,7 +10,7 @@
 }
 
 .success {
-  color: #FF0000;
+  color: #00FF00;
   font-weight: 800;
   margin-left: 5px;
 }
