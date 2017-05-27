@@ -1,9 +1,18 @@
 <?php
 session_start();
+
 if (isset($_SESSION['user_id'])) {
   header("Location: home.php");
   die();
 }
+
+require_once('db-connection.class.php');
+require_once('user-service.class.php');
+
+$db = new DBConnection();
+$userService = new UserService($db);
+
+
 $username = "";
 $username_taken = false;
 $firstname = "";
