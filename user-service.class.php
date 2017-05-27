@@ -1,5 +1,4 @@
 <?php
-$config = include('config/db.config.php');
 
 class UserService {
   private $dbContext;
@@ -10,6 +9,7 @@ class UserService {
   }
 
   private function saltPassword($password, $username) {
+    $config = include('config/db.config.php');
     return $config['salt'].$username.$password;
   }
 }
