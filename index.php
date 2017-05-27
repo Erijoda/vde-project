@@ -5,6 +5,7 @@ if (isset($_SESSION['user_id'])) {
   die();
 }
 $username = "";
+$username_taken = false;
 $firstname = "";
 $lastname = "";
 
@@ -46,16 +47,24 @@ if(isset($_POST['register'])) {
         <div>
           <label for="username">Username:</label>
           <input type="text" name="username" value="<?php echo $username;?>">
+          <?php
+           if (isset($_POST['register']) && empty($username)) {
+              echo '<span class="error">You must supply a username.</span>';
+            }
+            if (isset($_POST['register']) && $username_taken) {
+              echo '<span class="error">The username is already taken.</span>';
+            }
+          ?>
         </div>
         <div>
           <label for="password">Password:</label>
           <input type="password" name="password">
           <?php
             if (isset($_POST['register']) && ($_POST['password'] != $_POST['password2'])) {
-              echo '<span class="error">The passwords does not match</span>';
+              echo '<span class="error">The passwords does not match.</span>';
             }
             if (isset($_POST['register']) && empty($_POST['password'])) {
-              echo '<span class="error">You must supply a password</span>';
+              echo '<span class="error">You must supply a password.</span>';
             }
           ?>
         </div>
@@ -64,10 +73,10 @@ if(isset($_POST['register'])) {
           <input type="password" name="password2">
           <?php
             if (isset($_POST['register']) && ($_POST['password'] != $_POST['password2'])) {
-              echo '<span class="error">The passwords does not match</span>';
+              echo '<span class="error">The passwords does not match.</span>';
             }
             if (isset($_POST['register']) && empty($_POST['password'])) {
-              echo '<span class="error">You must supply a password</span>';
+              echo '<span class="error">You must supply a password.</span>';
             }
           ?>
         </div>
