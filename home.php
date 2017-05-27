@@ -1,3 +1,13 @@
+<?php
+require_once('bootstrap.php');
+
+if(isset($_GET['logout'])) {
+    if($userService->logout()){
+      header("Location: index.php");
+      die();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +18,6 @@
   <title>Document</title>
 </head>
 <body>
-  You are logged in now.
+  You are logged in now. <a href="?logout=1">Log out</a>
 </body>
 </html>
