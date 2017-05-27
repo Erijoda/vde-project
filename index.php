@@ -54,7 +54,7 @@ if(isset($_POST['register'])) {
             if (isset($_POST['register']) && ($_POST['password'] != $_POST['password2'])) {
               echo '<span class="error">The passwords does not match</span>';
             }
-            if (isset($_POST['register']) && empty($_POST['password']))) {
+            if (isset($_POST['register']) && empty($_POST['password'])) {
               echo '<span class="error">You must supply a password</span>';
             }
           ?>
@@ -66,7 +66,7 @@ if(isset($_POST['register'])) {
             if (isset($_POST['register']) && ($_POST['password'] != $_POST['password2'])) {
               echo '<span class="error">The passwords does not match</span>';
             }
-            if (isset($_POST['register']) && empty($_POST['password']))) {
+            if (isset($_POST['register']) && empty($_POST['password'])) {
               echo '<span class="error">You must supply a password</span>';
             }
           ?>
