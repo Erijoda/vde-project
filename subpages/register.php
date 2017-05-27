@@ -16,7 +16,9 @@ if (isset($_POST['register'])) {
     } else {
         if ($userService->register($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'])) {
           $error['successful'] = '<span class="success">You\'ve registered! You can now log in.</span>';
+          unset($_POST['register']);
           unset($_POST['username']);
+          unset($_POST['password']);
           unset($_POST['firstname']);
           unset($_POST['lastname']);
         }
@@ -28,7 +30,7 @@ if (isset($_POST['register'])) {
     <form method="POST">
         <div>
             <label for="username">Username:</label>
-            <input type="text" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'];?>">
+            <input type="text" name="username" value="<?php if (isset($_POST['register']) && isset($_POST['username'])) echo $_POST['username'];?>">
             <?php echo $error['username']; ?>
         </div>
         <div>
