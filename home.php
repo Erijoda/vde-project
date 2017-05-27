@@ -7,6 +7,10 @@ if(isset($_GET['logout'])) {
       die();
     }
 }
+if ($userService->isLoggedIn()) {
+  header("Location: index.php");
+  die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +22,8 @@ if(isset($_GET['logout'])) {
   <title>Document</title>
 </head>
 <body>
-  You are logged in now. <a href="?logout=1">Log out</a>
+  <?php if (isset($_SESSION['user_id'])) { ?>
+   You are logged in now. <a href="?logout=1">Log out</a>
+  <?php } ?>
 </body>
 </html>
