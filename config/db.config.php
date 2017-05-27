@@ -5,7 +5,7 @@ return array(
   'db'       => 'vde-project',
   'username' => 'root',
   'password' => 'kakm0nster',
-  'charset'  => 'utf-8',
+  'charset'  => 'utf8',
   'options'  => [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

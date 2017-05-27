@@ -5,7 +5,7 @@ class UserService {
 
   public function __construct($dbContext) {
     $this->dbContext = $dbContext;
-    echo $this->saltPassword();
+    echo $this->saltPassword("thisismypassword", "admin");
   }
 
   private function saltPassword($password, $username) {
