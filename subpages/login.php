@@ -4,6 +4,9 @@ $error['login'] = "";
 if (isset($_POST['login'])) {
   if (!$userService->login($_POST['username'], $_POST['password'])) {
     $error['login'] = '<span class="error">Username and/or password wrong.</span>';
+  } else {
+      header("Location: home.php");
+      die();
   }
 }
 
