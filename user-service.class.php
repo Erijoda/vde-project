@@ -9,7 +9,7 @@ class UserService {
 
   public function isUsernameTaken($username) {
     $stmt = $this->dbContext->prepare("SELECT id FROM users WHERE username=:username LIMIT 1");
-    $stmt->bindParam(':username');
+    $stmt->bindParam(':username', $username);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
       return true;
@@ -57,7 +57,7 @@ class UserService {
       try {
           $stmt = $this->dbContext->prepare("INSERT INTO users (username, password, firstname, lastname) VALUES(:username, :password, :firstname, :lastname)");
           $stmt->bindParam(':username', $username);
-          $stmt->bindParam(':password', password_hash($this->saltPassword($password, $username)));
+          $stmt->bindParam(':password', password_hash($this->saltPassword($password, $username), PASSWORD_DEFAULT));
           $stmt->bindParam(':firstname', $firstname);
           $stmt->bindParam(':lastname', $lastname);
 
