@@ -1,5 +1,9 @@
+#container {
+  margin: 1em auto;
+}
+
 .error {
   color: #FF0000;
-  font-weight: 800px;
+  font-weight: 800;
   margin-left: 5px;
 }
