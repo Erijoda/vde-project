@@ -1,9 +1,9 @@
 <?php
-$error['usernamepassword'] = "";
+$error['login'] = "";
 
 if (isset($_POST['login'])) {
   if (!$userService->login($_POST['username'], $_POST['password'])) {
-    $error['usernamepassword'] = '<span class="error">Username and/or password wrong.</span>';
+    $error['login'] = '<span class="error">Username and/or password wrong.</span>';
   }
 }
 
