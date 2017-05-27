@@ -19,11 +19,38 @@ if (!$userService->isLoggedIn()) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/normalize.css">
-  <title>Document</title>
+  <title>Home</title>
 </head>
 <body>
-  <?php if (isset($_SESSION['user_id'])) { ?>
-   You are logged in now. <a href="?logout=1">Log out</a>
-  <?php } ?>
+   <div id="container">
+       <div>
+           You are now logged in. <a href="?logout=1">Log out</a>
+       </div>
+       <div>
+           <h1>Userlist:</h1>
+           <table>
+               <thead>
+               <tr>
+                   <th>Id</th>
+                   <th>Username</th>
+                   <th>Firstname</th>
+                   <th>Lastname</th>
+               </tr>
+               </thead>
+               <tbody>
+               <?php
+               foreach ($db->query("SELECT (id, username, firstname, lastname) FROM users ORDER BY id ASC") as $row) {
+                echo "<tr>";
+                 echo "<td>{$row['id']}</td>";
+                 echo "<td>{$row['username']}</td>";
+                 echo "<td>{$row['firstname']}</td>";
+                 echo "<td>{$row['lastname']}</td>";
+                 echo "</tr>";
+               }
+               ?>
+               </tbody>
+           </table>
+       </div>
+   </div>
 </body>
 </html>
